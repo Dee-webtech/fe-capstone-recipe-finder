@@ -1,12 +1,20 @@
-# React + Vite
+# fe-capstone-recipe-finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My ALX Capstone Project: **Recipe Finder**  
+A web application that helps users discover delicious recipes based on the ingredients they already have at home.
 
-Currently, two official plugins are available:
+## Features
+- Search recipes by entering ingredients you already have
+- View a list of matching recipes
+- See detailed recipe instructions and ingredients
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React + Vite
+- Tailwind CSS
+- (Optional) API for fetching real recipes
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup
+1. Clone the repository  
+   ```bash
+   git clone https://github.com/Dee-webtech/fe-capstone-recipe-finder.git
+   cd fe-capstone-recipe-finder
