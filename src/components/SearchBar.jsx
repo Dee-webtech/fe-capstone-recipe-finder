@@ -1,20 +1,15 @@
 export default function SearchBar({ onSearch }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(e.target.elements.ingredients.value);
-  };
-
   return (
-    <form className="flex mb-6" onSubmit={handleSubmit}>
+    <div className="flex mb-6">
       <input
-        name="ingredients"
         type="text"
-        placeholder="Enter ingredients separated by comma..."
+        placeholder="Search recipes..."
         className="flex-grow p-2 border rounded-l-lg focus:outline-none"
+        onChange={(e) => onSearch(e.target.value)}
       />
-      <button className="bg-yellow-400 text-gray-900 px-4 rounded-r-lg hover:bg-yellow-500">
+      <button className="bg-blue-600 text-white px-4 rounded-r-lg hover:bg-blue-700">
         Search
       </button>
-    </form>
+    </div>
   );
 }
