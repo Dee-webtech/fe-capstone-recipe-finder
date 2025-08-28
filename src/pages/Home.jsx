@@ -2,27 +2,37 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import RecipeCard from "../components/RecipeCard";
 
-function Home() {
-  const [recipes] = useState([
-    { title: "Jollof Rice", ingredients: ["Rice", "Tomato", "Pepper"] },
-    { title: "Egusi Soup", ingredients: ["Egusi", "Spinach", "Palm oil"] },
-  ]);
-  const [query, setQuery] = useState("");
+export default function Home() {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const filtered = recipes.filter((r) =>
-    r.title.toLowerCase().includes(query.toLowerCase())
-  );
+  const handleSearch = async (ingredients) => {
+    setLoading(true);
+    try {
+      const ingredient = ingredients.split(",")[0].trim();
+      const res = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      );
+      const data = await res.json();
+      setRecipes(data.meals || []);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <SearchBar onSearch={setQuery} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filtered.map((r, i) => (
-          <RecipeCard key={i} recipe={r} />
+    <div className="p-6 max-w-7xl mx-auto">
+      <SearchBar onSearch={handleSearch} />
+      {loading && <p className="text-gray-600">Loading recipes...</p>}
+      {!loading && recipes.length === 0 && <p className="text-gray-500 mt-6">No recipes yet. Try searching!</p>}
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
     </div>
   );
 }
-
-export default Home;

@@ -1,0 +1,25 @@
+import cookingBg from "../assets/cooking-bg.jpg";
+
+export default function Landing() {
+  return (
+    <div
+      className="bg-cover bg-center h-screen relative flex items-center justify-center"
+      style={{ backgroundImage: `url(${cookingBg})` }}
+    >
+      {/* Overlay to darken the background */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      {/* Content on top */}
+      <div className="relative text-center text-white px-4">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">Recipe Finder</h1>
+        <p className="text-lg md:text-2xl mb-6">
+          Find recipes with the ingredients you already have
+        </p>
+        <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-6 py-3 rounded-lg">
+          Get Started
+        </button>
+      </div>
+    </div>
+  );
+}
+

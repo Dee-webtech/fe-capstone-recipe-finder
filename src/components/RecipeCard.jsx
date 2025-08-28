@@ -1,13 +1,16 @@
-function RecipeCard({ recipe }) {
+import { Link } from "react-router-dom";
+
+export default function RecipeCard({ recipe }) {
   return (
-    <div className="border rounded-lg shadow-md p-4 bg-white">
-      <h2 className="text-lg font-bold mb-2">{recipe.title}</h2>
-      <p className="text-sm text-gray-600">{recipe.ingredients.join(", ")}</p>
-      <button className="mt-2 text-sm text-blue-600 hover:underline">
-        View Details
-      </button>
+    <div className="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+      <img src={recipe.strMealThumb} alt={recipe.strMeal} className="rounded-lg mb-3" />
+      <h3 className="font-bold text-lg mb-2">{recipe.strMeal}</h3>
+      <Link
+        to={`/recipe/${recipe.idMeal}`}
+        className="text-blue-600 hover:underline text-sm"
+      >
+        View Recipe
+      </Link>
     </div>
   );
 }
-
-export default RecipeCard;
