@@ -9,7 +9,7 @@ function LandingPage() {
       className="h-screen flex flex-col justify-center items-center text-white bg-cover bg-center relative"
       style={{
         backgroundImage:
-          "url('https://cdn.pixabay.com/photo/2024/03/13/16/29/vegetables-9132663_1280.jpg')",
+          "url('src/assets/background.png')",
       }}
     >
       {/* Dark overlay */}
@@ -29,7 +29,7 @@ function LandingPage() {
   );
 }
 
-// ---------------- Home ----------------
+// ---------------- Home Page ----------------
 function Home() {
   const [query, setQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
