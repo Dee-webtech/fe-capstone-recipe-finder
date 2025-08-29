@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams } 
 import bg from "./assets/background.png";
 
 function LandingPage() {
+  const navigate = useNavigate(); // I hope navigation exists now
+
   return (
     <div
       className="h-screen flex flex-col justify-center items-center text-white bg-cover bg-center relative"
@@ -20,7 +22,7 @@ function LandingPage() {
         <p className="text-lg mb-6">Find recipes with what you already have</p>
         <button
           onClick={() => navigate("/home")}
-          className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-xl shadow-lg"
+          className="px-6 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg shadow-lg"
         >
           Start Cooking
         </button>
