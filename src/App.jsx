@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 
 // ---------------- Landing Page ----------------
+import bg from "./assets/background.png";
+
 function LandingPage() {
-  const navigate = useNavigate();
   return (
     <div
       className="h-screen flex flex-col justify-center items-center text-white bg-cover bg-center relative"
       style={{
-        backgroundImage:
-          "url('src/assets/background.png')",
+        backgroundImage: `url(${bg})`,
       }}
     >
       {/* Dark overlay */}
@@ -29,7 +29,7 @@ function LandingPage() {
   );
 }
 
-// ---------------- Home Page ----------------
+// ---------------- Home ----------------
 function Home() {
   const [query, setQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
