@@ -29,7 +29,7 @@ function LandingPage() {
   );
 }
 
-// ---------------- Home ----------------
+// ---------------- Home Page ----------------
 function Home() {
   const [query, setQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
