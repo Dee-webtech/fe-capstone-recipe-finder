@@ -1,70 +1,84 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function RecipeDetails() {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
+    if (!id) return;
     const fetchRecipe = async () => {
       try {
         const res = await fetch(
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
         );
         const data = await res.json();
-        setRecipe(data.meals[0]);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+        setRecipe(data.meals ? data.meals[0] : null);
+      } catch (err) {
+        console.error(err);
       }
     };
     fetchRecipe();
   }, [id]);
 
-  if (loading) return <p className="p-6">Loading recipe...</p>;
-  if (!recipe) return <p className="p-6">Recipe not found!</p>;
+  if (!recipe) return <p className="p-10 text-center">Loading recipe...</p>;
+
+  // Build ingredients list
+  const ingredients = Array.from({ length: 20 })
+    .map((_, i) => ({
+      ingredient: recipe[`strIngredient${i + 1}`],
+      measure: recipe[`strMeasure${i + 1}`],
+    }))
+    .filter((x) => x.ingredient && x.ingredient.trim() !== "");
+
+  // Split instructions into numbered steps by periods and newlines
+  const raw = recipe.strInstructions || "";
+  const instructions = raw
+    .split(/\r?\n/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .flatMap((line) => line.split(/(?<=\.)\s+/)) // split sentences
+    .filter(Boolean);
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="pt-20 px-6 max-w-4xl mx-auto">
       <button
-        onClick={() => navigate("/home")}
-        className="mb-4 text-blue-600 hover:underline"
+        onClick={() => navigate(-1)}
+        className="mb-6 bg-teal-600 text-white px-4 py-2 rounded-md"
       >
-        &lt; Back to recipes
+        ← Back
       </button>
-      <h2 className="text-2xl font-bold mb-4">{recipe.strMeal}</h2>
+
+      <h1 className="text-3xl font-bold text-teal-700 mb-4">{recipe.strMeal}</h1>
+
       <img
         src={recipe.strMealThumb}
         alt={recipe.strMeal}
-        className="rounded-lg mb-6 w-full"
+        className="w-full max-w-3xl mx-auto rounded-2xl mb-6 object-cover shadow-lg"
       />
-      <p className="mb-4">
-        <strong>Category:</strong> {recipe.strCategory}
-      </p>
-      <p className="mb-4">
-        <strong>Area:</strong> {recipe.strArea}
-      </p>
 
-      <h3 className="text-xl font-semibold mb-2">Ingredients</h3>
-      <ul className="list-disc list-inside mb-6">
-        {Array.from({ length: 20 }).map((_, i) => {
-          const ingredient = recipe[`strIngredient${i + 1}`];
-          const measure = recipe[`strMeasure${i + 1}`];
-          return (
-            ingredient && (
-              <li key={i}>
-                {ingredient} - {measure}
-              </li>
-            )
-          );
-        })}
-      </ul>
+      <section className="mb-6">
+        <h2 className="text-2xl font-semibold text-orange-600 mb-3">Ingredients</h2>
+        <ul className="list-disc pl-6 text-gray-700 space-y-1">
+          {ingredients.map((it, idx) => (
+            <li key={idx}>
+              {it.ingredient} {it.measure ? `- ${it.measure}` : ""}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <h3 className="text-xl font-semibold mb-2">Instructions</h3>
-      <p className="whitespace-pre-line">{recipe.strInstructions}</p>
+      <section>
+        <h2 className="text-2xl font-semibold text-orange-600 mb-3">Instructions</h2>
+        <ol className="list-decimal pl-6 text-gray-700 space-y-3">
+          {instructions.map((step, i) => (
+            <li key={i} className="leading-relaxed">
+              {step}
+            </li>
+          ))}
+        </ol>
+      </section>
     </div>
   );
 }

@@ -1,15 +1,17 @@
-export default function SearchBar({ onSearch }) {
+import React from "react";
+
+const SearchBar = ({ searchTerm, setSearchTerm }) => {
   return (
-    <div className="flex mb-6">
+    <div className="mb-6 flex justify-center">
       <input
         type="text"
         placeholder="Search recipes..."
-        className="flex-grow p-2 border rounded-l-lg focus:outline-none"
-        onChange={(e) => onSearch(e.target.value)}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full max-w-md border rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"
       />
-      <button className="bg-blue-600 text-white px-4 rounded-r-lg hover:bg-blue-700">
-        Search
-      </button>
     </div>
   );
-}
+};
+
+export default SearchBar;
