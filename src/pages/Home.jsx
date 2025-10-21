@@ -67,25 +67,42 @@ export default function Home() {
           Not sure what to make today? Discover recipes with what you already have.
           Search by ingredient or recipe name to get started.
         </p>
+        
+       <form
+  onSubmit={handleSearch}
+  className="mx-auto max-w-xl flex flex-col sm:flex-row items-center rounded-full overflow-hidden shadow-md bg-white/90"
+>
+  <input
+    type="text"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Search recipes (e.g., chicken, pasta, curry)..."
+    className="flex-1 w-full sm:w-auto min-w-[150px] px-4 py-3 text-sm sm:text-base bg-transparent focus:outline-none rounded-t-full sm:rounded-t-none sm:rounded-l-full"
+  />
+  <button
+    type="submit"
+    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold flex items-center justify-center gap-2 w-full sm:w-auto rounded-b-full sm:rounded-b-none sm:rounded-r-full"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-5 h-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+      />
+    </svg>
+    Search
+  </button>
+</form>
 
-
-        <form
-          onSubmit={handleSearch}
-          className="mx-auto max-w-xl flex rounded-full overflow-hidden shadow-md"
-        >
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search recipes (e.g., chicken, pasta, curry)..."
-            className="flex-1 px-4 py-3 bg-white/90 focus:outline-none"
-          />
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 font-semibold">
-            Search
-          </button>
-        </form>
-      </div>
-    </header>
+</div>
+ </header>
 
       {/* Recipe Cards Section */}
       <main className="max-w-6xl mx-auto px-6 -mt-8"> {/* pull up cards */} 
