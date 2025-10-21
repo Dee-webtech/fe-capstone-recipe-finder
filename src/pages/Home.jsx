@@ -67,21 +67,20 @@ export default function Home() {
           Not sure what to make today? Discover recipes with what you already have.
           Search by ingredient or recipe name to get started.
         </p>
-        
+
        <form
   onSubmit={handleSearch}
-  className="mx-auto max-w-xl flex flex-col sm:flex-row items-center rounded-full overflow-hidden shadow-md bg-white/90"
+  className="mx-auto max-w-xl flex items-stretch rounded-full overflow-hidden shadow-md bg-white/90"
 >
   <input
     type="text"
     value={search}
     onChange={(e) => setSearch(e.target.value)}
     placeholder="Search recipes (e.g., chicken, pasta, curry)..."
-    className="flex-1 w-full sm:w-auto min-w-[150px] px-4 py-3 text-sm sm:text-base bg-transparent focus:outline-none rounded-t-full sm:rounded-t-none sm:rounded-l-full"
+    className="flex-1 px-4 py-3 text-sm sm:text-base bg-transparent focus:outline-none"
   />
   <button
-    type="submit"
-    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold flex items-center justify-center gap-2 w-full sm:w-auto rounded-b-full sm:rounded-b-none sm:rounded-r-full"
+    className="bg-orange-500 hover:bg-orange-600 text-white px-6 flex items-center justify-center"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +96,6 @@ export default function Home() {
         d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
       />
     </svg>
-    Search
   </button>
 </form>
 
